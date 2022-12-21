@@ -117,6 +117,82 @@ SELECT
 FROM work_pareto
 ORDER BY performance_count DESC;
 
+-- Pareto charts with rolling percentages for different composers' works. This is for Mozart.
+DROP TABLE IF EXISTS mozart_pareto;
+CREATE TEMP TABLE mozart_pareto (
+	composer VARCHAR(255),
+	work VARCHAR(255),
+	performance_count NUMERIC,
+	work_percent NUMERIC
+);
+
+INSERT INTO mozart_pareto
+WITH total_performances AS (
+SELECT SUM(performances) total_sum FROM opera_stats
+WHERE composer = 'Mozart'
+)
+SELECT 
+	t1.composer, 
+	t1.work,
+	SUM(t1.performances),
+	ROUND((SUM(t1.performances) * 1.0 / t2.total_sum * 100), 2)
+FROM 
+	opera_stats t1, 
+	(SELECT total_sum FROM total_performances) t2
+WHERE composer = 'Mozart'
+GROUP BY 
+	t1.composer, 
+	t1.work,
+	t2.total_sum
+
+	-- Query that returns the rolling percentage
+SELECT 
+	composer,
+	work,
+	performance_count,
+	work_percent,
+	SUM(work_percent) OVER (ORDER BY work_percent DESC) AS rolling_percent
+FROM mozart_pareto
+ORDER BY performance_count DESC;
+
+-- Same as above but for Wagner
+DROP TABLE IF EXISTS wagner_pareto;
+CREATE TEMP TABLE wagner_pareto (
+	composer VARCHAR(255),
+	work VARCHAR(255),
+	performance_count NUMERIC,
+	work_percent NUMERIC
+);
+
+INSERT INTO wagner_pareto
+WITH total_performances AS (
+SELECT SUM(performances) total_sum FROM opera_stats
+WHERE composer = 'Wagner,Richard'
+)
+SELECT 
+	t1.composer, 
+	t1.work,
+	SUM(t1.performances),
+	ROUND((SUM(t1.performances) * 1.0 / t2.total_sum * 100), 2)
+FROM 
+	opera_stats t1, 
+	(SELECT total_sum FROM total_performances) t2
+WHERE composer = 'Wagner,Richard'
+GROUP BY 
+	t1.composer, 
+	t1.work,
+	t2.total_sum;
+
+	-- Query that returns rolling percentage
+SELECT 
+	composer,
+	work,
+	performance_count,
+	work_percent,
+	SUM(work_percent) OVER (ORDER BY work_percent DESC) AS rolling_percent
+FROM wagner_pareto
+ORDER BY performance_count DESC;
+
 -- #3
 -- Find the total performance count and % of total performances for each nationality. 
 WITH total_performances AS (
@@ -166,6 +242,74 @@ SELECT
 	nationality_percent,
 	SUM(nationality_percent) OVER (ORDER BY nationality_percent DESC) AS rolling_percent
 FROM nationality_pareto
+ORDER BY performance_count DESC;
+
+-- Pareto charts with rolling percentages for different nationalities. This is Russia.
+DROP TABLE IF EXISTS russia_pareto;
+CREATE TEMP TABLE russia_pareto (
+	composer VARCHAR(255),
+	performance_count NUMERIC,
+	composer_percent NUMERIC
+);
+
+INSERT INTO russia_pareto
+WITH total_performances AS (
+SELECT SUM(performances) total_sum FROM opera_stats
+WHERE composer_nationality = 'Russia'
+)
+SELECT 
+	t1.composer, 
+	SUM(t1.performances),
+	ROUND((SUM(t1.performances) * 1.0 / t2.total_sum * 100), 2)
+FROM 
+	opera_stats t1, 
+	(SELECT total_sum FROM total_performances) t2
+WHERE composer_nationality = 'Russia'
+GROUP BY 
+	t1.composer, 
+	t2.total_sum;
+
+	-- Query that returns the rolling percentage
+SELECT 
+	composer,
+	performance_count,
+	composer_percent,
+	SUM(composer_percent) OVER (ORDER BY composer_percent DESC) AS rolling_percent
+FROM russia_pareto
+ORDER BY performance_count DESC;
+
+-- Same as above, but for the US. Much more egalitarian
+DROP TABLE IF EXISTS us_pareto;
+CREATE TEMP TABLE us_pareto (
+	composer VARCHAR(255),
+	performance_count NUMERIC,
+	composer_percent NUMERIC
+);
+
+INSERT INTO us_pareto
+WITH total_performances AS (
+SELECT SUM(performances) total_sum FROM opera_stats
+WHERE composer_nationality = 'United States'
+)
+SELECT 
+	t1.composer, 
+	SUM(t1.performances),
+	ROUND((SUM(t1.performances) * 1.0 / t2.total_sum * 100), 2)
+FROM 
+	opera_stats t1, 
+	(SELECT total_sum FROM total_performances) t2
+WHERE composer_nationality = 'United States'
+GROUP BY 
+	t1.composer, 
+	t2.total_sum;
+
+	-- Query that returns the rolling percentage
+SELECT 
+	composer,
+	performance_count,
+	composer_percent,
+	SUM(composer_percent) OVER (ORDER BY composer_percent DESC) AS rolling_percent
+FROM us_pareto
 ORDER BY performance_count DESC;
 
 -- #4
@@ -423,4 +567,134 @@ ORDER BY
 	total_pieces DESC
 
 -- #12
+-- Find the top composer from each nationality, along with the percentage of performances that composer gets within their nationality.
+SELECT 
+	comp.composer_nationality, 
+	comp.composer, 
+	comp.total_perf_by_comp, 
+	nation.total_perf_by_nat, 
+	ROUND((comp.total_perf_by_comp::NUMERIC/nation.total_perf_by_nat)*100, 2) AS pct_of_nat
+FROM 
+	(SELECT 
+	 	t3.composer_nationality, 
+	 	t3.composer, 
+	 	t3.sum_perf total_perf_by_comp
+	FROM 
+		(SELECT 
+			composer_nationality, 
+		 	composer, 
+		 	SUM(performances) AS sum_perf
+		FROM opera_stats
+	  	GROUP BY 1, 2) t3
+	JOIN 
+		(SELECT 
+			composer_nationality, 
+		 	MAX(sum_perf) max_sum_perf
+		FROM 
+			(SELECT 
+				composer_nationality, 
+			 	composer, 
+			 	SUM(performances) AS sum_perf
+			FROM opera_stats
+			GROUP BY 1, 2
+			HAVING SUM(performances) > 25) t1
+		GROUP BY 1) t2
+	ON 
+		t2.composer_nationality = t3.composer_nationality 
+	 	AND t2.max_sum_perf = t3.sum_perf) comp
+JOIN (
+	WITH total_performances AS (
+	SELECT SUM(performances) total_sum FROM opera_stats
+	)
+	SELECT 
+		t1.composer_nationality, 
+		SUM(t1.performances) total_perf_by_nat
+	FROM 
+		opera_stats t1, 
+		(SELECT total_sum FROM total_performances) t2
+	GROUP BY 1, t2.total_sum) nation
+ON comp.composer_nationality = nation.composer_nationality
+ORDER BY 
+	pct_of_nat DESC, 
+	total_perf_by_nat DESC
 
+-- This one doesn't work yet. It's supposed to be like the above but for specific works.
+SELECT 
+	comp.composer_nationality, 
+	comp.composer, 
+	comp.work,
+	comp.total_perf_by_comp, 
+	nation.total_perf_by_nat, 
+	ROUND((comp.total_perf_by_comp::NUMERIC/nation.total_perf_by_nat)*100, 2) AS pct_of_nat
+FROM 
+	(SELECT 
+	 	t3.composer_nationality, 
+	 	t3.composer, 
+	 	t3.work,
+	 	t3.sum_perf total_perf_by_comp
+	FROM 
+		(SELECT 
+			composer_nationality, 
+		 	composer,
+		 	work,
+		 	SUM(performances) AS sum_perf
+		FROM opera_stats
+	  	GROUP BY 1, 2, 3) t3
+	JOIN 
+		(SELECT 
+			composer_nationality, 
+		 	MAX(sum_perf) max_sum_perf
+		FROM 
+			(SELECT 
+				composer_nationality, 
+			 	composer, 
+			 	work,
+			 	SUM(performances) AS sum_perf
+			FROM opera_stats
+			GROUP BY 1, 2, 3
+			HAVING SUM(performances) > 25) t1
+		GROUP BY 1) t2
+	ON 
+		t2.composer_nationality = t3.composer_nationality 
+	 	AND t2.max_sum_perf = t3.sum_perf) comp
+JOIN (
+	WITH total_performances AS (
+	SELECT SUM(performances) total_sum FROM opera_stats
+	)
+	SELECT 
+		t1.composer_nationality,
+		SUM(t1.performances) total_perf_by_nat
+	FROM 
+		opera_stats t1, 
+		(SELECT total_sum FROM total_performances) t2
+	GROUP BY 1, t2.total_sum) nation
+ON comp.composer_nationality = nation.composer_nationality
+ORDER BY 
+	pct_of_nat DESC
+
+-- Find the top-performed female composer and how many performances she has
+SELECT 
+	composer, 
+	SUM(performances) sum_perf
+FROM opera_stats
+WHERE gender = 'f'
+GROUP BY composer
+ORDER BY sum_perf DESC
+LIMIT 1;
+
+-- Find the names of all the composers who have more performances than the most-performed female composer. There are 146 of them
+SELECT composer, SUM(performances) performance_count
+FROM opera_stats
+GROUP BY composer
+HAVING 
+	SUM(performances) >= (
+		SELECT MAX(sum_perf) max_female_perf
+		FROM (
+			SELECT 
+				composer, 
+				SUM(performances) sum_perf
+			FROM opera_stats
+			WHERE gender = 'f'
+			GROUP BY composer) t1
+	)
+ORDER BY performance_count DESC
