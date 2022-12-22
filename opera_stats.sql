@@ -672,6 +672,22 @@ ON comp.composer_nationality = nation.composer_nationality
 ORDER BY 
 	pct_of_nat DESC
 
+-- Find the gender breakdown of performance counts.
+WITH total_performances AS (
+SELECT SUM(performances) total_sum FROM opera_stats
+)
+SELECT 
+	t1.gender, 
+	SUM(t1.performances) AS performance_count,
+	ROUND((SUM(t1.performances) * 1.0 / t2.total_sum * 100), 2) AS gender_percent
+FROM 
+	opera_stats t1, 
+	(SELECT total_sum FROM total_performances) t2
+GROUP BY 
+	t1.gender, 
+	t2.total_sum
+ORDER BY performance_count DESC
+
 -- Find the top-performed female composer and how many performances she has
 SELECT 
 	composer, 
@@ -683,9 +699,14 @@ ORDER BY sum_perf DESC
 LIMIT 1;
 
 -- Find the names of all the composers who have more performances than the most-performed female composer. There are 146 of them
-SELECT composer, SUM(performances) performance_count
+SELECT 
+	composer, 
+	gender, 
+	SUM(performances) performance_count
 FROM opera_stats
-GROUP BY composer
+GROUP BY 
+	composer, 
+	gender
 HAVING 
 	SUM(performances) >= (
 		SELECT MAX(sum_perf) max_female_perf
@@ -698,3 +719,121 @@ HAVING
 			GROUP BY composer) t1
 	)
 ORDER BY performance_count DESC
+
+-- Find the names of all operas that have more performances than the most-performed opera by a female composer. There are 321 of them
+SELECT 
+	composer, 
+	work, 
+	gender, 
+	SUM(performances) performance_count
+FROM opera_stats
+GROUP BY 
+	composer, 
+	work, 
+	gender
+HAVING 
+	SUM(performances) >= (
+		SELECT MAX(sum_perf) max_female_perf
+		FROM (
+			SELECT 
+				composer, 
+				work,
+				SUM(performances) sum_perf
+			FROM opera_stats
+			WHERE gender = 'f'
+			GROUP BY 
+				composer, 
+				work) t1
+	)
+ORDER BY 
+	performance_count DESC, 
+	gender DESC
+
+-- Find the total number of works and total number of performances per composer in the same table
+SELECT 
+	s.composer, 
+	c.work_count, 
+	s.sum_perf
+FROM (
+	WITH total_performances AS (
+	SELECT SUM(performances) total_sum FROM opera_stats
+	)
+	SELECT 
+		t1.composer, 
+		SUM(t1.performances) sum_perf
+	FROM 
+		opera_stats t1, 
+		(SELECT total_sum FROM total_performances) t2
+	GROUP BY 
+		t1.composer, 
+		t2.total_sum) s
+JOIN (
+	WITH total_count AS (
+	SELECT COUNT(DISTINCT(work)) distinct_works FROM opera_stats
+	)
+	SELECT 
+		composer, 
+		COUNT(DISTINCT(t1.work)) work_count
+	FROM 
+		opera_stats t1, 
+		(SELECT distinct_works FROM total_count) t2
+	GROUP BY 
+		composer, 
+		t2.distinct_works) c
+ON s.composer = c.composer
+ORDER BY 
+	s.sum_perf DESC, 
+	c.work_count DESC, 
+	s.composer
+
+-- Find each composer's most popular opera, and the % that piece makes up of their total performances. Shows which composers wrote a wide range of popular operas, vs. those that have 1 hit
+SELECT 
+	comp.composer, 
+	piece.work, 
+	piece.total_perf_piece, 
+	comp.total_perf_comp, 
+	ROUND((piece.total_perf_piece::NUMERIC/comp.total_perf_comp)*100, 2) AS pct_of_comp
+FROM (
+	SELECT 
+		t3.composer, 
+		t3.work, 
+		t3.sum_perf AS total_perf_piece
+	FROM (
+		SELECT 
+			composer, 
+			work, 
+			SUM(performances) AS sum_perf
+		FROM opera_stats
+	  	GROUP BY 1,2) t3
+	JOIN (
+		SELECT 
+			composer, 
+			MAX(sum_perf) max_sum_perf
+		FROM (
+			SELECT 
+				composer, 
+				work, 
+				SUM(performances) AS sum_perf
+			FROM opera_stats
+			GROUP BY 1, 2
+			HAVING SUM(performances) > 250) t1
+		GROUP BY 1) t2
+	ON 
+		t2.composer = t3.composer 
+		AND t2.max_sum_perf = t3.sum_perf) piece
+JOIN (
+	WITH total_performances AS (
+	SELECT SUM(performances) total_sum FROM opera_stats
+	)
+	SELECT 
+		t1.composer, 
+		SUM(t1.performances) total_perf_comp
+	FROM 
+		opera_stats t1, 
+		(SELECT total_sum FROM total_performances) t2
+	GROUP BY 1, t2.total_sum) comp
+ON comp.composer = piece.composer
+ORDER BY 
+	pct_of_comp,
+	total_perf_comp DESC
+
