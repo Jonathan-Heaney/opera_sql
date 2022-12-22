@@ -363,8 +363,13 @@ ORDER BY performance_count DESC
 -- #6
 -- Find the number and percent of countries where a particular composer is most represented.
 WITH country_total AS (
-	SELECT COUNT(DISTINCT performance_country) countries
-	FROM opera_stats
+	SELECT COUNT(DISTINCT(performance_country)) countries
+	FROM (
+		SELECT performance_country, composer, SUM(performances) sum_perf
+		FROM opera_stats
+		GROUP BY 1,2
+		HAVING SUM(performances) > 10
+	) sub
 )
 SELECT 
 	composer, 
@@ -393,7 +398,8 @@ FROM
 			 	composer, 
 			 	SUM(performances) AS sum_perf
 			FROM opera_stats
-			GROUP BY 1, 2) t1
+			GROUP BY 1, 2
+			HAVING SUM(performances) > 10) t1
 		GROUP BY 1) t2
 	ON 
 	 	t2.performance_country = t3.performance_country 
@@ -440,8 +446,13 @@ ORDER BY performance_count DESC
 -- #8
 -- Find the number and percent of countries where a particular work is most represented.
 WITH country_total AS (
-	SELECT COUNT(DISTINCT performance_country) countries
-	FROM opera_stats
+	SELECT COUNT(DISTINCT(performance_country)) countries
+	FROM (
+		SELECT performance_country, composer, work, SUM(performances) sum_perf
+		FROM opera_stats
+		GROUP BY 1,2,3
+		HAVING SUM(performances) > 10
+	) sub
 )
 SELECT 
 	composer,
@@ -474,7 +485,8 @@ FROM
 			 	work,
 			 	SUM(performances) AS sum_perf
 			FROM opera_stats
-			GROUP BY 1, 2, 3) t1
+			GROUP BY 1, 2, 3
+			HAVING SUM(performances) > 10) t1
 		GROUP BY 1) t2
 	ON 
 	 	t2.performance_country = t3.performance_country 
