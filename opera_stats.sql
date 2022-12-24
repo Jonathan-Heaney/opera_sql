@@ -745,7 +745,8 @@ ORDER BY
 -- #9
 -- Find the total number of works and total number of performances per composer in the same table
 SELECT 
-	s.composer, 
+	s.composer,
+	s.composer_nationality,
 	c.work_count, 
 	s.sum_perf
 FROM (
@@ -753,13 +754,15 @@ FROM (
 	SELECT SUM(performances) total_sum FROM opera_stats
 	)
 	SELECT 
-		t1.composer, 
+		t1.composer,
+		t1.composer_nationality,
 		SUM(t1.performances) sum_perf
 	FROM 
 		opera_stats t1, 
 		(SELECT total_sum FROM total_performances) t2
 	GROUP BY 
-		t1.composer, 
+		t1.composer,
+		t1.composer_nationality,
 		t2.total_sum) s
 JOIN (
 	WITH total_count AS (
