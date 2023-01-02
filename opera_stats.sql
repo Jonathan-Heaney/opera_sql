@@ -403,6 +403,15 @@ GROUP BY
 ORDER BY work_count DESC
 
 -- #5
+-- Find the number of performances per country, to determine the countries where opera is most popular.
+SELECT 
+	performance_country, 
+	SUM(performances) AS sum_perf
+FROM opera_stats
+GROUP BY performance_country
+ORDER BY sum_perf DESC
+
+-- #5a
 -- Find the most represented composer per country. Includes the restraint that the composer had to have at least 10 performances total.
 SELECT 
 	t1.performance_country, 
@@ -433,7 +442,7 @@ ON
 	AND t1.performance_count = t3.max_perf_count 
 ORDER BY performance_count DESC
 
--- #5a
+-- #5b
 -- Find the number and percent of countries where a particular composer is most represented.
 WITH country_total AS (
 	SELECT COUNT(DISTINCT(performance_country)) countries
