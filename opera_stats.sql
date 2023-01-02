@@ -734,7 +734,7 @@ GROUP BY
 	work, 
 	gender
 HAVING 
-	SUM(performances) >= (
+	SUM(performances) > (
 		SELECT MAX(sum_perf) max_female_perf
 		FROM (
 			SELECT 
