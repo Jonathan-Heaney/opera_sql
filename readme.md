@@ -1,3 +1,5 @@
+<base target="_blank">
+
 # Worldwide Opera Performance Data, 2012-2018
 
 ## Background
