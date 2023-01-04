@@ -24,3 +24,26 @@ This dataset was a comprehensive list of opera performances. To clean the datase
 The main caveat of this dataset is that it only includes up to 2018. Normally this lack of immediate recency wouldn't be relevant; however, the COVID pandemic and social justice conversations in the wake of George Floyd protests have had a resounding impact on the classical music and opera worlds, as everywhere else. I would be interested to see a dataset in a few years from now incorporating these changes to determine any tangible impact on the composers being performed and stories being told in opera.
 
 Another important caveat to keep in mind is that many smaller opera companies, particularly in the United States, would likely be left out of a dataset such as this. It would be very difficult to keep an accurate count of every single operatic performance, especially ones that only have a small audience of dozens. At least in the US, a lot of the most innovative programming of newer and lesser-known composers happens at these small grassroots companies, which wouldn't be reflected in this dataset.
+
+## Analysis Tools/Methods
+
+For this project, I used SQL to analyze the data and Tableau for visualization.
+
+- All SQL queries can be found [here](https://github.com/Jonathan-Heaney/opera_sql/blob/main/opera_stats.sql)
+- Tableau visualizations can be found [here](https://public.tableau.com/views/opera_stats/PerfCountComposer?:language=en-US&:display_count=n&:origin=viz_share_link)
+
+## Conclusions
+
+#### Power Laws/Pareto Principle
+
+The main takeaway is that opera performances are dominated to an extreme degree by power laws. This means that performances are very unevenly distributed: although there are thousands of pieces in existence, a much, much smaller number gets performed with any regularity. The same is true for composers; there are many of them, but a small number dominate the field.
+The [Pareto Principle](https://betterexplained.com/articles/understanding-the-pareto-principle-the-8020-rule/) states that 80% of outcomes come from 20% of causes, but opera is actually even more extreme in this regard. For example:
+
+- The top 38 operas (out of 2,863 in this dataset) make up 50% of total performances.
+- 80% of performances come from 7.9% of operas.
+- The top 8 composers (out of 1,411) make up 52% of total performances.
+- 90% of performances come from 10% of composers.
+
+Though a lot of composer nationalities were represented (69 total), the top 4 (all European) represent 76% of all performances.
+
+The outputs of many individual composers also follow a power law- for example, Mozart wrote 21 operas, but 90% of his performances came from his top 5.
