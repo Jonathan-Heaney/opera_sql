@@ -29,6 +29,7 @@ Another important caveat to keep in mind is that many smaller opera companies, p
 
 For this project, I used SQL to analyze the data and Tableau for visualization.
 
+- All SQL queries can be found <a href="https://github.com/Jonathan-Heaney/opera_sql/blob/main/opera_stats.sql" target="_blank">here</a>
 - All SQL queries can be found [here](https://github.com/Jonathan-Heaney/opera_sql/blob/main/opera_stats.sql)
 - Tableau visualizations can be found [here](https://public.tableau.com/views/opera_stats/PerfCountComposer?:language=en-US&:display_count=n&:origin=viz_share_link)
 
