@@ -1,5 +1,3 @@
-<base target="_blank">
-
 # Worldwide Opera Performance Data, 2012-2018
 
 ## Background
@@ -31,7 +29,6 @@ Another important caveat to keep in mind is that many smaller opera companies, p
 
 For this project, I used SQL to analyze the data and Tableau for visualization.
 
-- All SQL queries can be found <a href="https://github.com/Jonathan-Heaney/opera_sql/blob/main/opera_stats.sql" target="_blank">here</a>
 - All SQL queries can be found [here](https://github.com/Jonathan-Heaney/opera_sql/blob/main/opera_stats.sql)
 - Tableau visualizations can be found [here](https://public.tableau.com/views/opera_stats/PerfCountComposer?:language=en-US&:display_count=n&:origin=viz_share_link)
 
@@ -40,13 +37,14 @@ For this project, I used SQL to analyze the data and Tableau for visualization.
 #### Power Laws/Pareto Principle
 
 The main takeaway is that opera performances are dominated to an extreme degree by power laws. This means that performances are very unevenly distributed: although there are thousands of pieces in existence, a much, much smaller number gets performed with any regularity. The same is true for composers; there are many of them, but a small number dominate the field.
+
 The [Pareto Principle](https://betterexplained.com/articles/understanding-the-pareto-principle-the-8020-rule/) states that 80% of outcomes come from 20% of causes, but opera is actually even more extreme in this regard. For example:
 
-- The top 38 operas (out of 2,863 in this dataset) make up 50% of total performances.
-- 80% of performances come from 7.9% of operas.
-- The top 8 composers (out of 1,411) make up 52% of total performances.
-- 90% of performances come from 10% of composers.
+- The top **38** operas (out of 2,863 in this dataset) make up **50%** of total performances.
+- **80%** of performances come from **7.9%** of operas.
+- The top **8** composers (out of 1,411) make up **52%** of total performances.
+- **90%** of performances come from **10%** of composers.
 
-Though a lot of composer nationalities were represented (69 total), the top 4 (all European) represent 76% of all performances.
+Though a lot of composer nationalities were represented (69 total), the top **4** (all European) represent **76%** of all performances.
 
-The outputs of many individual composers also follow a power law- for example, Mozart wrote 21 operas, but 90% of his performances came from his top 5.
+The outputs of many individual composers also follow a power law- for example, Mozart wrote 21 operas, but **90%** of his performances came from his top **5**.
