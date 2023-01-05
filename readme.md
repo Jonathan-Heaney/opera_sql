@@ -19,7 +19,7 @@ This dataset was a comprehensive list of opera performances. To clean the datase
   - It's highly possible that some non-operas still slipped through the cracks; however, these would only be pieces that received a few performances total and would not materially affect the conclusions.
 - Converted ISO country codes to country names, for better readability on composer nationality and performance country columns.
 
-#### Dataset Caveats
+### Dataset Caveats
 
 The main caveat of this dataset is that it only includes up to 2018. Normally this lack of immediate recency wouldn't be relevant; however, the COVID pandemic and social justice conversations in the wake of George Floyd protests have had a resounding impact on the classical music and opera worlds, as everywhere else. I would be interested to see a dataset in a few years from now incorporating these changes to determine any tangible impact on the composers being performed and stories being told in opera.
 
@@ -36,7 +36,7 @@ For this project, I used SQL to analyze the data and Tableau for visualization.
 
 ## Conclusions
 
-#### Opera composition is a winner-take-all field.
+### Opera composition is a winner-take-all field.
 
 The main takeaway is that opera performances are dominated to an extreme degree by power laws. This means that performances are very unevenly distributed: although there are thousands of pieces in existence, a much, much smaller number gets performed with any regularity. The same is true for composers; there are many of them, but a small number dominate the field.
 
@@ -66,7 +66,7 @@ These statistics may not be good news for the health of the opera industry as a 
 
 Most composers maintain similar styles throughout their careers, so by focusing on these few operas by these composers, one could cover an extremely high percentage of all the composers/works that one would be expected to know.
 
-#### To get good at writing operas, you need to write a lot of them.
+### To get good at writing operas, you need to write a lot of them.
 
 Opera is a difficult medium for composition. A composer has to consider the plot, character development, lyrics, melody, orchestration, and on and on. Given the demands, it's perhaps not surprising that most composers don't write a hit opera on their first try. The most popular opera by a composer who wrote only one is Beethoven's _Fidelio_, with 748 performances. It's the 36th-most-popular (and Beethoven re-wrote it so many times over the course of many years that it almost can't count as the first try).
 
@@ -78,4 +78,4 @@ Some more statistics to put this in perspective:
 
 The caveat that this dataset doesn't include all written works, only performed works, strengthens this argument. Some composers may have written even more pieces, but they are so forgotten that they received 0 performances in this period.
 
-#### The gender distribution is maybe even more extreme than expected.
+### The gender distribution is maybe even more extreme than expected.
