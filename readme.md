@@ -78,4 +78,14 @@ Some more statistics to put this in perspective:
 
 The caveat that this dataset doesn't include all written works, only performed works, strengthens this argument. Some composers may have written even more pieces, but they are so forgotten that they received 0 performances in this period.
 
-### The gender distribution is maybe even more extreme than expected.
+### The gender distribution of performances is extreme.
+
+Opera composition has been a male-dominated field for a long time, for both complex and not-so-complex reasons. But that historical disparity is still relevant in contemporary performances of opera- out of 140,537 performances, only 1,093, or 0.78%, were for pieces composed by women.
+
+Some more worrying numbers:
+
+- There are 146 male composers who received more performances than the most-performed female composer, Kaija Saariaho.
+- There are 317 works by male composers that received more performances than the most-performed opera by a female composer.
+  - This opera, _Der satanarchaolugenialkohollische Wunschpunsch_ by Elisabeth Naske, was written specifically for children, putting it arguably in a different category than most operas on this list. There are 387 operas by male composers with more performances than the most-performed work by a woman that wasn't written for children: _As One_ by Laura Kaminsky.
+
+This would be one of the most interesting trends to observe in recent years, post-2020. Programming more pieces by members of under-represented groups in opera has been a major point of discussion in recent years, more so than it was in the mid-2010s.
