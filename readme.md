@@ -10,7 +10,9 @@ In this project, I explored a dataset of opera performances around the world bet
 
 ## Dataset/Cleaning
 
-This dataset was a comprehensive list of opera performances. To clean the dataset and ensure its accuracy, I took the following steps:
+This dataset was a comprehensive list of opera performances. The original was found on Kaggle, at [this link](https://www.kaggle.com/datasets/thedevastator/world-s-largest-database-of-opera-performances).
+
+To clean the dataset and ensure its accuracy, I took the following steps:
 
 - Removed columns that were unnecessary for my analysis, including season, production, type, and start date
 - Cleaned the composer nationality column by looking up all composers that had null values
@@ -31,8 +33,8 @@ Finally, this dataset of course only has data on operas that have been performed
 
 For this project, I used SQL to analyze the data and Tableau for visualization.
 
-- All SQL queries can be found [here](https://github.com/Jonathan-Heaney/opera_sql/blob/main/opera_stats.sql)
-- Tableau visualizations can be found [here](https://public.tableau.com/views/opera_stats/PerfCountComposer?:language=en-US&:display_count=n&:origin=viz_share_link)
+- All SQL queries can be found [here](https://github.com/Jonathan-Heaney/opera_sql/blob/main/opera_stats.sql).
+- Tableau visualizations can be found [here](https://public.tableau.com/views/opera_stats/PerfCountComposer?:language=en-US&:display_count=n&:origin=viz_share_link).
 
 ## Conclusions
 
