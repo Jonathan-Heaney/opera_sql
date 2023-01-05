@@ -31,10 +31,14 @@ Finally, this dataset of course only has data on operas that have been performed
 
 ## Analysis Tools/Methods
 
-For this project, I used SQL to analyze the data and Tableau for visualization.
+For this project, I used Excel/Google Sheets to clean the dataset and store the results of the queries, SQL to analyze the data and Tableau for visualization.
 
-- All SQL queries can be found [here](https://github.com/Jonathan-Heaney/opera_sql/blob/main/opera_stats.sql).
-- Tableau visualizations can be found [here](https://public.tableau.com/views/opera_stats/PerfCountComposer?:language=en-US&:display_count=n&:origin=viz_share_link).
+Links to all relevant items:
+
+- [Cleaned dataset](https://docs.google.com/spreadsheets/d/1TzvFEXHW9B0Kms5ASjqg-oyI9BtJpNqreXTGeE6gnto/edit#gid=1415207453)
+- [All SQL queries](https://github.com/Jonathan-Heaney/opera_sql/blob/main/opera_stats.sql)
+- [Results sheets](https://docs.google.com/spreadsheets/d/1yIaik_xMHLSvy_NqRSq9F4zJgVxSStfV8xfSJqeJGhk/edit#gid=813183170)
+- [Tableau visualizations](https://public.tableau.com/views/opera_stats/PerfCountComposer?:language=en-US&:display_count=n&:origin=viz_share_link)
 
 ## Conclusions
 
