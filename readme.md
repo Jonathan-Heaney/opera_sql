@@ -84,7 +84,7 @@ Some more statistics to put this in perspective:
 
 The caveat that this dataset doesn't include all written works, only performed works, strengthens this argument. Some composers may have written even more pieces, but they are so forgotten that they received 0 performances in this period.
 
-[(Graph)](https://public.tableau.com/app/profile/jonathan.heaney/viz/Worksvs.Performances/)
+[(Graph)](https://public.tableau.com/views/opera_stats/Worksvs_Performances?:language=en-US&:display_count=n&:origin=viz_share_link)
 
 ### The gender distribution of performances is extreme.
 
