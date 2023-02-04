@@ -49,13 +49,13 @@ The main takeaway is that opera performances are dominated to an extreme degree 
 The [Pareto Principle](https://betterexplained.com/articles/understanding-the-pareto-principle-the-8020-rule/) states that 80% of outcomes come from 20% of causes, but opera is actually even more extreme in this regard. For example:
 
 - The top **8** composers (out of 1,411) make up **52%** of total performances.
-- **80%** of performances come from **3%** of composers. [(Graph)](https://public.tableau.com/app/profile/jonathan.heaney/viz/opera_stats/8020WorkPareto)
+- **80%** of performances come from **3%** of composers. [(Graph)](https://public.tableau.com/app/profile/jonathan.heaney/viz/opera_stats/8020ComposerPareto)
 - The top **38** operas (out of 2,863 in this dataset) make up **50%** of total performances.
 - **80%** of performances come from **7.9%** of operas. [(Graph)](https://public.tableau.com/app/profile/jonathan.heaney/viz/opera_stats/8020WorkPareto)
 
-Though a lot of composer nationalities were represented (69 total), the top **4** (all European) represent **76%** of all performances. [(Graph)](https://public.tableau.com/app/profile/jonathan.heaney/viz/opera_stats/8020WorkPareto)
+Though a lot of composer nationalities were represented (69 total), the top **4** (all European) represent **76%** of all performances. [(Graph)](https://public.tableau.com/app/profile/jonathan.heaney/viz/opera_stats/NationalityPareto)
 
-The outputs of many individual composers also follow a power law- for example, Mozart wrote 21 operas, but **90%** of his performances came from his top **5**. [(Graph)](https://public.tableau.com/app/profile/jonathan.heaney/viz/opera_stats/8020WorkPareto)
+The outputs of many individual composers also follow a power law- for example, Mozart wrote 21 operas, but **90%** of his performances came from his top **5**. [(Graph)](https://public.tableau.com/app/profile/jonathan.heaney/viz/opera_stats/MozartPareto)
 
 These statistics may not be good news for the health of the opera industry as a whole, but they do provide some pretty clear takeaways for someone who was in my position:
 
@@ -84,16 +84,16 @@ Some more statistics to put this in perspective:
 
 The caveat that this dataset doesn't include all written works, only performed works, strengthens this argument. Some composers may have written even more pieces, but they are so forgotten that they received 0 performances in this period.
 
-[(Graph)](https://public.tableau.com/app/profile/jonathan.heaney/viz/opera_stats/8020WorkPareto)
+[(Graph)](https://public.tableau.com/app/profile/jonathan.heaney/viz/Worksvs.Performances/)
 
 ### The gender distribution of performances is extreme.
 
-Opera composition has been a male-dominated field for a long time, for both complex and not-so-complex reasons. But that historical disparity is still relevant in contemporary performances of opera- out of 140,537 performances, only 1,093, or 0.78%, were for pieces composed by women. [(Graph)](https://public.tableau.com/app/profile/jonathan.heaney/viz/opera_stats/8020WorkPareto)
+Opera composition has been a male-dominated field for a long time, for both complex and not-so-complex reasons. But that historical disparity is still relevant in contemporary performances of opera- out of 140,537 performances, only 1,093, or 0.78%, were for pieces composed by women. [(Graph)](https://public.tableau.com/app/profile/jonathan.heaney/viz/opera_stats/GenderBreakdown)
 
 Some more worrying numbers:
 
-- There are 146 male composers who received more performances than the most-performed female composer, Kaija Saariaho. [(Graph)](https://public.tableau.com/app/profile/jonathan.heaney/viz/opera_stats/8020WorkPareto)
-- There are 317 works by male composers that received more performances than the most-performed opera by a female composer. [(Graph)](https://public.tableau.com/app/profile/jonathan.heaney/viz/opera_stats/8020WorkPareto)
+- There are 146 male composers who received more performances than the most-performed female composer, Kaija Saariaho. [(Graph)](https://public.tableau.com/app/profile/jonathan.heaney/viz/opera_stats/TopFemaleComposer)
+- There are 317 works by male composers that received more performances than the most-performed opera by a female composer. [(Graph)](https://public.tableau.com/app/profile/jonathan.heaney/viz/opera_stats/TopFemaleWork)
   - This opera, _Der satanarchaolugenialkohollische Wunschpunsch_ by Elisabeth Naske, was written specifically for children, putting it arguably in a different category than most operas on this list. There are 387 operas by male composers with more performances than the most-performed work by a woman that wasn't written for children: _As One_ by Laura Kaminsky.
 
 This would be one of the most interesting trends to observe in recent years, post-2020. Programming more pieces by members of under-represented groups in opera has been a major point of discussion in recent years, more so than it was in the mid-2010s.
