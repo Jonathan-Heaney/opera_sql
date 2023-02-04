@@ -49,7 +49,7 @@ The main takeaway is that opera performances are dominated to an extreme degree 
 The [Pareto Principle](https://betterexplained.com/articles/understanding-the-pareto-principle-the-8020-rule/) states that 80% of outcomes come from 20% of causes, but opera is actually even more extreme in this regard. For example:
 
 - The top **8** composers (out of 1,411) make up **52%** of total performances.
-- **80%** of performances come from **3%** of composers. [(Graph)](https://public.tableau.com/app/profile/jonathan.heaney/viz/opera_stats/8020ComposerPareto)
+- **80%** of performances come from **3%** of composers. [(Graph)](https://public.tableau.com/views/opera_stats/8020ComposerPareto_1?:language=en-US&:display_count=n&:origin=viz_share_link)
 - The top **38** operas (out of 2,863 in this dataset) make up **50%** of total performances.
 - **80%** of performances come from **7.9%** of operas. [(Graph)](https://public.tableau.com/app/profile/jonathan.heaney/viz/opera_stats/8020WorkPareto)
 
